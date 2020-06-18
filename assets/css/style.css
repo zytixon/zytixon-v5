@@ -22,6 +22,12 @@ h1 {
     background-repeat: no-repeat;
 }
 
+@media screen and (max-width: 840px) {
+    .page--login {
+        background-image: none;
+    }
+}
+
 .login-content {
     display: flex;
     flex-direction: column;
@@ -39,7 +45,6 @@ h1 {
         height: 100%;
         justify-content: center;
         text-align: center;
-        background-color: #2e2e2e;
     }
 }
 
