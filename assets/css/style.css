@@ -55,10 +55,11 @@ h1 {
 }
 
 .login-box {
-    background-color: #2E2E2E;
+    background-color: #00000088;
     margin: 20px;
     padding: 20px;
     border-radius: 15px;
+    backdrop-filter: blur(12px);
 }
 
 .login-box h1 {
@@ -78,8 +79,8 @@ h1 {
     display: block;
     margin: 10px 0;
     padding: 10px 20px;
-    border: 1px solid #8e8e8e;
-    background-color: #4a4a4a;
+    border-style: none;
+    background-color: #00000088;
     color: white;
     border-radius: 15px;
 }
