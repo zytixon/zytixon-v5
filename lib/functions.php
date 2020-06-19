@@ -6,3 +6,8 @@ function sanitize_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function redirect($location) {
+    header("Location: $location");
+    exit();
+}

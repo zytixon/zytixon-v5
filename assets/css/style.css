@@ -66,6 +66,12 @@ h1 {
     margin-top: 0;
 }
 
+.login-box .error {
+    padding: 20px;
+    background-color: #db1a00;
+    border-radius: 15px;
+}
+
 .text-input {
     -webkit-appearance: none;
     -moz-appearance: none;

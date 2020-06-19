@@ -5,5 +5,4 @@ $_SESSION = array();
 
 session_destroy();
 
-header("Location: /");
-exit();
+redirect("/");

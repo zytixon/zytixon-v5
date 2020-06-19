@@ -2,6 +2,10 @@
 
 require __DIR__ . "/lib/boot.php";
 
+if (isset($_SESSION["tag"])) {
+    redirect("/");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tag = sanitize_input($_POST["tag"]);
     $password = sanitize_input($_POST["password"]);
@@ -17,15 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $actualpassword)) {
             $_SESSION["tag"] = $row["tag"];
 
-            header("Location: /");
-            exit();
+            redirect("/");
         } else {
-            echo "Mot de passe ou nom d'utilisateur incorrect.";
+            $error = "Mot de passe ou nom d'utilisateur incorrect.";
         }
     } else if (!$result) {
         die("<h1>An error occured.</h1>" . $database->error);
     } else {
-        echo "Mot de passe ou nom d'utilisateur incorrect.";
+        $error = "Mot de passe ou nom d'utilisateur incorrect.";
     }
 }
 ?>
@@ -43,6 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="login-box">
             <h1>Log in</h1>
             <p><strong>Welcome back!</strong></p>
+            <?php
+            if (isset($error)) {
+                echo "<div class='error'>$error</div>";
+            }
+            ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
                 <input class="text-input" type="text" name="tag" placeholder="Zytixon ID">
                 <input class="text-input" type="password" name="password" placeholder="Password">
