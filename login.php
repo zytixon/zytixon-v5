@@ -23,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             redirect("/");
         } else {
-            $error = "Mot de passe ou nom d'utilisateur incorrect.";
+            $error = "Username or password is incorrect.";
         }
     } else if (!$result) {
         die("<h1>An error occured.</h1>" . $database->error);
     } else {
-        $error = "Mot de passe ou nom d'utilisateur incorrect.";
+        $error = "Username or password is incorrect.";
     }
 }
 ?>

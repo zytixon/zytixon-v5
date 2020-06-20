@@ -7,7 +7,8 @@ function sanitize_input($data)
     return $data;
 }
 
-function redirect($location) {
+function redirect($location)
+{
     header("Location: $location");
     exit();
 }
