@@ -8,6 +8,7 @@
 
 body {
     font-family: "Roboto", sans-serif;
+    line-height: 1.5;
     background-color: #2E2E2E;
     color: white;
 }
@@ -15,6 +16,46 @@ body {
 h1 {
     font-family: "Nexa", sans-serif;
 }
+
+/* Text styles */
+
+.text--muted {
+    color: rgba(255, 255, 255, 80%);
+}
+
+/* UI elements */
+
+.text-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #00000088;
+    color: white;
+    border-radius: 15px;
+}
+
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background-image: var(--primary-gradient);
+    border-color: transparent;
+}
+
+/* Login/Register */
 
 .page--login {
     background-image: url(https://source.unsplash.com/collection/8673383/);
@@ -73,34 +114,8 @@ h1 {
     border-radius: 15px;
 }
 
-.text-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: block;
-    margin: 10px 0;
-    padding: 10px 20px;
-    border-style: none;
-    background-color: #00000088;
-    color: white;
-    border-radius: 15px;
-}
-
-.btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-.btn--primary {
-    background-image: var(--primary-gradient);
-    border-color: transparent;
+.login-content .text-input {
+    width: 100%;
 }
 
 .login-box .btn {
