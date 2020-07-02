@@ -45,19 +45,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <img src="/assets/logos/logo-dev.png" alt="Zytixon logo" class="logo">
         <div class="login-box">
             <h1>Log in</h1>
-            <p><strong>Welcome back!</strong></p>
             <?php
             if (isset($error)) {
                 echo "<div class='error'>$error</div>";
             }
+            if (isset($_GET["fromAccountCreated"])) {
+                echo "<p><strong>You are signed up! Log in below &darr;</strong></p>";
+            }
+            else {
+                echo "<p><strong>Welcome back!</strong></p>";
+            }
             ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-                <input class="text-input" type="text" name="tag" placeholder="Zytixon ID">
-                <input class="text-input" type="password" name="password" placeholder="Password">
+                <input class="text-input" type="text" name="tag" placeholder="Zytixon ID" required="">
+                <input class="text-input" type="password" name="password" placeholder="Password" required="">
                 <button class="btn btn--primary" type="submit">Log in</button>
+                <a class="btn" href="/register.php">Register</a>     
             </form>
         </div>
     </div>
+    <script src="/assets/js/login.js"></script>
 </body>
 
 </html>

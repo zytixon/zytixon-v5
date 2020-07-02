@@ -6,34 +6,51 @@ if (isset($_SESSION["tag"])) {
     redirect("/");
 }
 
+// thanks to the ppl of the code() discord for help with this one :D
+$tagcheck = "/^[a-zA-Z0-9]{3,14}$/";
 // stolen from this website https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript/
-$passwordcheck = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})^";
+$passwordcheck = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})^/";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tag = sanitize_input($_POST["tag"]);
+    $password = $_POST["password"];
+    $password2 = $_POST["password2"];
+    // We don't sanitize passwords, because :
+    // - They are never shown on page.
+    // - The special chars being parsed as HTML enitites would require to type these entities literally.
+    // They also won't hurt the database (normally), since we are using prepared statements.
 
-    if (true) { // Here we should check the username with a regex
-        $password = sanitize_input($_POST["password"]);
-        $password2 = sanitize_input($_POST["password2"]);
-
-        if (preg_match($passwordcheck, $password) != 0) {
-            if ($password == $password2) {
-                // Everything is correct, add the user to the db
-
-                $stmt = $database->prepare("SELECT tag, password FROM users WHERE tag = ?;");
+    if (preg_match($tagcheck, $tag)) {
+        if ($password === $password2) {
+            if (preg_match($passwordcheck, $password)) {
+                $stmt = $database->prepare("SELECT tag FROM users WHERE tag = ?;");
                 $stmt->bind_param("s", $tag);
                 $stmt->execute();
-            } else {
-                $error = "Passwords do not match.";
+                $result = $stmt->get_result();
+
+                if ($result->num_rows == 0) {
+                    $passwordhash = password_hash($password, PASSWORD_DEFAULT);
+                    $stmt = $database->prepare("INSERT INTO users (tag, password, avatar_url) VALUES (?, ?, '/assets/images/avatar-default.png')");
+                    $stmt->bind_param("ss", $tag, $passwordhash);
+                    $stmt->execute();
+
+                    redirect("/login.php?fromAccountCreated");
+                        $error = "The user doesn't exist, yay!";
+                    }
+                else {
+                    $error = "This ID is already taken. Use your creativity!";
+                }
+            }
+            else {
+                $error = "The password you chose is not strong enough.";
             }
         } else {
-            $error = "Password is not strong enough.";
+            $error = "The two passwords don't match.";
         }
     } else {
-        $error = "Username is invalid";
+        $error = "Your ID is invalid, or empty.";
     }
 }
-
 ?>
 
 <html class="style--dev">
@@ -61,18 +78,20 @@ if (isset($error)) {
                         3-14 characters with no spaces.</span>
                     </p>
                 </label>
-                <input id="js-id-input" class="text-input" type="text" name="tag" placeholder="e.g. ecnivtwelve or VinceLinise">
+                <input id="js-id-input" class="text-input" type="text" name="tag" placeholder="e.g. ecnivtwelve or VinceLinise" required="">
                 <label for="js-password-input">
                     <p>
                         <strong>Choose a strong password</strong>
                     </p>
                 </label>
-                <input id="js-password-input" class="text-input" type="password" name="password" placeholder="At least 8 characters with mixed case and symbols">
-                <input id="js-password-input" class="text-input" type="password" name="password2" placeholder="Retype your password">
+                <input id="js-password-input" class="text-input" type="password" name="password" placeholder="At least 8 characters with mixed case and symbols" required="">
+                <input id="js-password-input" class="text-input" type="password" name="password2" placeholder="Retype your password" required="">
                 <button class="btn btn--primary" type="submit">Let's start!</button>
+                <a class="btn" href="/login.php">Log in</a>
             </form>
         </div>
     </div>
+    <script src="/assets/js/login.js"></script>
 </body>
 
 </html>
