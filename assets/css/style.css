@@ -6,8 +6,14 @@
     --primary-gradient: linear-gradient(180deg, #9C4BE0 0%, #5F22AD 100%);;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: "Roboto", sans-serif;
+    line-height: 1.5;
     background-color: #2E2E2E;
     color: white;
 }
@@ -15,6 +21,54 @@ body {
 h1 {
     font-family: "Nexa", sans-serif;
 }
+
+/* Text styles */
+
+.text--muted {
+    color: rgba(255, 255, 255, 80%);
+}
+
+/* UI elements */
+
+.text-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-style: none;
+    background-color: #00000088;
+    color: white;
+    border-radius: 5px;
+}
+
+.text-input.invalid {
+    box-shadow: 0 0 0 2px #db1a00;
+}
+
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    font: inherit;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn--primary {
+    background-image: var(--primary-gradient);
+    background-repeat: no-repeat;
+    border-width: 0;
+    padding: 12px 22px; /* 1px added on each side to replace the border */ 
+}
+
+/* Login/Register */
 
 .page--login {
     background-image: url(https://source.unsplash.com/collection/8673383/);
@@ -32,7 +86,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: 25%;
     left: 25%;
 }
@@ -58,7 +112,7 @@ h1 {
     background-color: #00000088;
     margin: 20px;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 5px;
     backdrop-filter: blur(12px);
 }
 
@@ -70,39 +124,14 @@ h1 {
 .login-box .error {
     padding: 20px;
     background-color: #db1a00;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 
-.text-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: block;
-    margin: 10px 0;
-    padding: 10px 20px;
-    border-style: none;
-    background-color: #00000088;
-    color: white;
-    border-radius: 15px;
-}
-
-.btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-.btn--primary {
-    background-image: var(--primary-gradient);
-    border-color: transparent;
+.login-content .text-input {
+    width: 100%;
 }
 
 .login-box .btn {
-    margin: 10px 0;
+    margin-left: 0;
+    margin-right: 10px;
 }
