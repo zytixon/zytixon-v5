@@ -8,7 +8,7 @@ if (isset($_SESSION["tag"])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tag = sanitize_input($_POST["tag"]);
-    $password = sanitize_input($_POST["password"]);
+    $password = $_POST["password"]);
 
     $stmt = $database->prepare("SELECT tag, password FROM users WHERE tag = ?;");
     $stmt->bind_param("s", $tag);
