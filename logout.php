@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/lib/boot.php";
+require __DIR__ . "/include/boot.php";
 
 $_SESSION = array();
 

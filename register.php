@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/lib/boot.php";
+require __DIR__ . "/include/boot.php";
 
 if (isset($_SESSION["tag"])) {
     redirect("/");
