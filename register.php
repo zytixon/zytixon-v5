@@ -3,7 +3,7 @@
 require __DIR__ . "/include/boot.php";
 
 if (isset($_SESSION["tag"])) {
-    redirect("/");
+    redirect("./");
 }
 
 // thanks to the ppl of the code() discord for help with this one :D

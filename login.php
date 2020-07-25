@@ -3,7 +3,7 @@
 require __DIR__ . "/include/boot.php";
 
 if (isset($_SESSION["tag"])) {
-    redirect("/");
+    redirect("./"); 
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $actualpassword)) {
             $_SESSION["tag"] = $row["tag"];
 
-            redirect("/");
+            redirect("./");
         } else {
             $error = "Username or password is incorrect.";
         }
