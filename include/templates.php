@@ -1,6 +1,6 @@
 <?php
 
-function tpl_roomslist_room($channeltag) {
+function tpl_roomslist_room($channel) {
     echo "<a href=\"#\" class=\"sidebar__item sidebar__nav-item\"><span class=\"iconify\"
-                        data-icon=\"mdi:pound\"></span>$channeltag</a>\n";
+                        data-icon=\"mdi:pound\"></span>{$channel['name']}</a>\n";
 }

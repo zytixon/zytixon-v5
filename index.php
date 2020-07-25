@@ -2,29 +2,8 @@
 
 require __DIR__ . "/include/boot.php";
 
-if (!isset($_SESSION["tag"])) {
+if (!isset($_SESSION["id"])) {
     redirect("./login.php");
-}
-
-// Get the user's channels.
-function get_user_channels($tag) {
-	global $database;
-	if(!$stmt = $database->prepare("SELECT room_name FROM user_room_relationship WHERE user_tag = ?;")) {
-		die("<div class=\"sidebar__item\">An error occured getting your rooms.</div>");
-	}
-	$stmt->bind_param("s", $tag);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$rooms = [];
-	if ($result->num_rows > 0) {
-		while($row = $result->fetch_assoc()) {
-			$rooms[] = $row["room_name"];
-		}
-	}
-	else {
-		return false;
-	}
-	return $rooms;
 }
 ?>
 
@@ -45,7 +24,7 @@ function get_user_channels($tag) {
                 <hr>
                 <div class="js-channels-list">
                 <?php
-                	$channels = get_user_channels($_SESSION["tag"]);
+                	$channels = get_user_channels($_SESSION["id"]);
                 	if (!$channels) {
                 ?>
                 	<div class="sidebar__item">
@@ -66,7 +45,7 @@ function get_user_channels($tag) {
             <div class="sidebar__item sidebar__item--bottom sidebar__user">
                 <img src="/assets/images/default-avatar.png" alt="Your avatar" class="avatar avatar--away">
                 <div>
-                    <p class="sidebar__user-tag">koioDesigns</p>
+                    <p class="sidebar__user-tag"><?php echo get_user_tag_from_id($_SESSION["id"]) ?></p>
                     <div class="sidebar__user-status-wrapper">
                         <select name="user-status" class="sidebar__user-status-select">
                         <option value="online">Online</option>

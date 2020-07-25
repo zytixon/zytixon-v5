@@ -2,7 +2,7 @@
 
 require __DIR__ . "/include/boot.php";
 
-if (isset($_SESSION["tag"])) {
+if (isset($_SESSION["id"])) {
     redirect("./");
 }
 
@@ -35,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
 
                     redirect("/login.php?fromAccountCreated");
-                        $error = "The user doesn't exist, yay!";
                     }
                 else {
                     $error = "This ID is already taken. Use your creativity!";
