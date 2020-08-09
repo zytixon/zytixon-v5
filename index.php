@@ -5,6 +5,12 @@ require __DIR__ . "/include/boot.php";
 if (!isset($_SESSION["id"])) {
     redirect("./login.php");
 }
+
+if (isset($_POST["do"])) {
+    if ($_POST["do"] = "create-room") {
+        include(__DIR__ . "/include/action-create-room.php");
+    }
+}
 ?>
 
 <html class="style--dev">

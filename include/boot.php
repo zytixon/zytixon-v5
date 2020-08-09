@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 
 // Load functions
 require __DIR__ . "/functions.php";
-require __DIR__ . "/dbhelpers.php";
+require __DIR__ . "/database.php";
 require __DIR__ . "/templates.php";
 
 // Load the website configuration.
