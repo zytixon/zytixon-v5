@@ -2,8 +2,8 @@
 
 require __DIR__ . "/include/boot.php";
 
-if (isset($_SESSION["tag"])) {
-    redirect("/");
+if (isset($_SESSION["id"])) {
+    redirect("./");
 }
 
 // thanks to the ppl of the code() discord for help with this one :D
@@ -35,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
 
                     redirect("/login.php?fromAccountCreated");
-                        $error = "The user doesn't exist, yay!";
                     }
                 else {
                     $error = "This ID is already taken. Use your creativity!";

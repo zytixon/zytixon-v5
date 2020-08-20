@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --primary-gradient: linear-gradient(180deg, #01A6BA 0%, #2783C0 100%);
 }
@@ -37,7 +41,7 @@ h1 {
     margin: 10px 0;
     padding: 10px 20px;
     border-style: none;
-    background-color: #00000088;
+    background-color: hsla(0, 0%, 0%, 50%);
     color: white;
     border-radius: 5px;
 }
@@ -66,6 +70,171 @@ h1 {
     background-repeat: no-repeat;
     border-width: 0;
     padding: 12px 22px; /* 1px added on each side to replace the border */ 
+}
+
+.btn--square {
+    padding: 10px;
+}
+
+.btn--square.btn--primary {
+    padding: 12px;
+}
+
+.avatar {
+    max-width: 42px;
+    max-height: 42px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    background-color: rgba(0, 0, 0, 25%);
+    overflow-y: auto;
+}
+
+.sidebar__item {
+    display: flex;
+    padding: 0 10px 10px;
+}
+
+.sidebar__nav-item {
+    position: relative;
+    align-items: center;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 50%);
+}
+
+.sidebar__nav-item svg {
+    margin-right: 10px;
+}
+
+.sidebar__nav-item:hover, .sidebar__nav-item:focus, .sidebar__nav-item--active {
+    color: white;
+}
+
+.sidebar__nav-item--active::before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 2px;
+    height: 50%;
+    background-color: white;
+    border-radius: 0 10px 10px 0;
+}
+
+.sidebar hr {
+    margin: 0 10px 10px;
+    border-color: rgba(255, 255, 255, 20%);
+}
+
+.sidebar__item--bottom {
+    margin-top: auto;
+}
+
+.sidebar__user {
+    align-items: center;
+}
+
+.sidebar__user-tag {
+    color: white;
+    margin: 0;
+}
+
+.sidebar__user > div {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.sidebar__user-status-wrapper {
+    display: flex;
+    position: relative;
+    align-items: center;
+    max-width: 50%;
+}
+
+.sidebar__user-status-wrapper svg {
+    position: absolute;
+    right: 0;
+    color: rgba(255, 255, 255, 50%);
+    pointer-events: none;
+}
+
+.sidebar__user-status-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 50%);
+}
+
+.sidebar__user-status-select:hover, .sidebar__user-status-select:focus {
+    color: white;
+}
+
+.sidebar__user-status-select:hover + svg, .sidebar__user-status-select:focus + svg {
+    color: white;
+}
+
+.sidebar__user-status-select option {
+    padding: 0;
+}
+
+.modal {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 50%);
+    z-index: 9999;
+}
+
+.modal.modal--visible {
+    display: flex;
+}
+
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    background-color: #232323;
+    border-radius: 5px;
+}
+
+.modal__title {
+    margin-top: 15px;
+    padding: 0 15px;
+}
+
+.modal__title h1 {
+    margin: 0;
+}
+
+.modal__content {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 15px;
+}
+
+.modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+}
+
+.modal__footer * {
+    margin-bottom: 0;
 }
 
 /* Login/Register */
@@ -134,4 +303,89 @@ h1 {
 .login-box .btn {
     margin-left: 0;
     margin-right: 10px;
+}
+
+/* Main app */
+
+.app-left-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 256px;
+    height: 100%;
+}
+
+.chat {
+    position: fixed;
+    top: 0;
+    left: 256px;
+    width: 100%;
+    max-width: calc(100% - 512px); /* 2*256 */
+    height: 100%;
+}
+
+.chat__bottom {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 256px;
+    bottom: 0;
+    width: 100%;
+    max-width: calc(100% - 512px);
+    padding: 10px;
+}
+
+.chat__message-input, .chat__bottom .btn {
+    margin: 0;
+}
+
+.chat__message-input-wrapper {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.chat__message-input {
+    width: 100%;
+}
+
+.room-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 256px;
+    height: 100%;
+}
+
+.add-room-modal {
+    height: auto;
+}
+
+.add-room-modal form {
+    margin-bottom: 0;
+}
+
+.add-room-modal__icon {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 32px;
+    height: 32px;
+}
+
+.add-room-modal__input {
+    width: calc(100% - 52px);
+    margin: 0;
+    margin-left: 52px; /* 32px (the size of the icon) + 20px (the icon is 20px from the left) */
+    padding-left: 10px;
+    font-family: "Nexa", sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.add-room-modal__info {
+    padding: 0 20px 10px;
 }

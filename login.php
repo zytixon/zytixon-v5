@@ -2,15 +2,15 @@
 
 require __DIR__ . "/include/boot.php";
 
-if (isset($_SESSION["tag"])) {
-    redirect("/");
+if (isset($_SESSION["id"])) {
+    redirect("./"); 
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tag = sanitize_input($_POST["tag"]);
     $password = $_POST["password"];
 
-    $stmt = $database->prepare("SELECT tag, password FROM users WHERE tag = ?;");
+    $stmt = $database->prepare("SELECT id, tag, password FROM users WHERE tag = ?;");
     $stmt->bind_param("s", $tag);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $actualpassword = $row["password"];
         if (password_verify($password, $actualpassword)) {
-            $_SESSION["tag"] = $row["tag"];
+            $_SESSION["id"] = $row["id"];
 
-            redirect("/");
+            redirect("./");
         } else {
             $error = "Username or password is incorrect.";
         }
