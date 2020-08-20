@@ -54,7 +54,6 @@ function create_room($name, $privacy_level)
     global $database;
 
     // Check if the room exists.
-
     if (!$stmt = $database->prepare("SELECT name FROM rooms WHERE `name` = ?")) {
         die("<h1>An error occured.</h1>");
     }
@@ -63,23 +62,26 @@ function create_room($name, $privacy_level)
     $result = $stmt->get_result();
     if (!$result->num_rows > 0) {
         // It doesn't, create it.
-        if (!$stmt = $database->prepare("INSERT INTO rooms VALUES (NULL, ?, ?, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")) {
+        if (!$stmt = $database->prepare("INSERT INTO rooms
+            VALUES (NULL, ?, ?, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")) {
             die("<h1>An error occured.</h1>");
         }
         $stmt->bind_param("ss", $name, $privacy_level);
         if (!$stmt->execute()) {
             die("<h1>An error occured.</h1>" . $database->error);
         }
-
-        die($database->insert_id);
+        $lastinserted = $database->insert_id;
 
         // And add the current user to it as owner.
-        if (!$stmt = $database->prepare("INSERT INTO user_room_relationship VALUES (?, ?, 2, 4, NULL)")) {
+        if (!$stmt = $database->prepare("INSERT INTO user_room_relationship VALUES (?, ?, 2, 4, CURRENT_TIMESTAMP)")) {
             die("<h1>An error occured.</h1>");
         }
-        $stmt->bind_param("ii", $_SESSION["id"], $database->insert_id);
+        $stmt->bind_param("ii", $_SESSION["id"], $lastinserted);
         if (!$stmt->execute()) {
             die("<h1>An error occured.</h1>" . $database->error);
         }
+    }
+    else {
+        return "Room already exists.";
     }
 }
